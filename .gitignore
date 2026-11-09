@@ -1,0 +1,21 @@
+# Nix build outputs and local development state
+result
+result-*
+.direnv/
+.env
+.env.*
+!.env.example
+
+# Never commit secrets or private key material
+secrets/
+private/
+*.pem
+*.key
+id_rsa
+id_ed25519
+*.p12
+
+# Local machine state
+*.swp
+*.swo
+.DS_Store
