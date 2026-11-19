@@ -1,0 +1,17 @@
+name: Validate NixOS configuration
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - name: Evaluate flake
+        run: nix flake check --no-build
+      - name: Evaluate host derivation
+        run: nix eval --raw .#nixosConfigurations.nixos.config.system.build.toplevel.drvPath
